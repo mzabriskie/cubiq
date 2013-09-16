@@ -3,9 +3,8 @@ img-gallery
 
 JavaScript image gallery
 
-Although functional, this is a rough first draft
-
 ## TODO
+Although functional, this is a rough first draft
 
 * Testing
 * Animations
@@ -21,44 +20,6 @@ gallery.add('image-b.png', 'image-b-thumb.png');
 gallery.add('image-c.png', 'image-c-thumb.png');
 gallery.add('image-d.png', 'image-d-thumb.png');
 gallery.render();
-```
-
-## Building
-
-First you will need to clone a copy of the img-gallery repository:
-
-```bash
-git clone https://github.com/mzabriskie/img-gallery.git
-```
-
-From the img-gallery directory install the Node dependencies:
-
-```bash
-cd img-gallery && npm install
-```
-
-Now you can build the project:
-
-```bash
-grunt
-```
-
-This will run the tests and if they pass copy the built files to the `dist` directory.
-
-## Testing
-
-First you will need to clone the repo and install the Node dependencies (see the first two steps from Building above).
-
-Using grunt:
-
-```bash
-grunt test
-```
-
-Using npm:
-
-```bash
-npm test
 ```
 
 ## API
@@ -104,6 +65,44 @@ This method is already called by `render`. You only need to call it manually if 
 
 ### detach()
 Detach the event handlers
+
+## Building
+
+First you will need to clone a copy of the img-gallery repository:
+
+```bash
+git clone https://github.com/mzabriskie/img-gallery.git
+```
+
+From the img-gallery directory install the Node dependencies:
+
+```bash
+cd img-gallery && npm install
+```
+
+Now you can build the project:
+
+```bash
+grunt
+```
+
+This will run the tests and if they pass copy the built files to the `dist` directory.
+
+## Testing
+
+First you will need to clone the repo and install the Node dependencies (see the first two steps from Building above).
+
+Using grunt:
+
+```bash
+grunt test
+```
+
+Using npm:
+
+```bash
+npm test
+```
 
 ## License
 
