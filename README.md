@@ -1,4 +1,4 @@
-img-gallery
+img-gallery [![Build Status](https://travis-ci.org/mzabriskie/img-gallery.png?branch=master)](https://travis-ci.org/mzabriskie/img-gallery)
 ===========
 
 JavaScript image gallery
