@@ -5,6 +5,13 @@ JavaScript image gallery
 
 Although functional, this is a rough first draft
 
+## TODO
+
+* Testing
+* Animations
+* Themes/Layouts
+* Examples
+
 ## Example
 
 ```js
