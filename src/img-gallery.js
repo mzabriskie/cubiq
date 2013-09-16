@@ -338,6 +338,7 @@ THE SOFTWARE.
 
         this.handleFullScreenChange = function () {
             this._scale(); // Safari and Opera need this when exiting full screen
+            this._scroll();
         }.bind(this);
     };
 
@@ -391,6 +392,21 @@ THE SOFTWARE.
         var sWidth = this.thumbnails.scrollWidth,
             sLeft = this.thumbnails.scrollLeft,
             oWidth = this.thumbnails.offsetWidth;
+
+        if (typeof offset === 'undefined') {
+            // Sync thumbs with active image
+            var thumb = this.thumbnails.children[this._index];
+            if (thumb.offsetLeft < this.thumbnails.scrollLeft) {
+                offset = (thumb.offsetLeft - thumb.offsetWidth);
+            } else if ((thumb.offsetLeft + thumb.offsetWidth) > (this.thumbnails.scrollLeft + this.thumbnails.offsetWidth)) {
+                offset = ((thumb.offsetLeft + (thumb.offsetWidth * 2)) - this.thumbnails.offsetWidth);
+            }
+
+            // If offset is undefined then thumbnail is already visible
+            if (typeof offset === 'undefined') {
+                return;
+            }
+        }
 
         if (offset === -1) {
             this.thumbnails.scrollLeft = Math.max(0, sLeft - oWidth);
@@ -451,25 +467,18 @@ THE SOFTWARE.
      */
     ImageGallery.prototype.select = function (index) {
         if (index < this.images.length && index > -1) {
-            var thumb = this.thumbnails.children[this._index];
             if (typeof this._index !== 'undefined') {
-                removeClass(thumb, 'active');
+                removeClass(this.thumbnails.children[this._index], 'active');
             }
 
             this.image.src = this.images[index];
             this._index = index;
-            thumb = this.thumbnails.children[this._index];
 
-            addClass(thumb, 'active');
+            addClass(this.thumbnails.children[this._index], 'active');
             toggleClass(this.preview, 'img-gallery-hasimageprev', index > 0);
             toggleClass(this.preview, 'img-gallery-hasimagenext', index < this.images.length - 1);
 
-            // Sync thumbs with active image
-            if (thumb.offsetLeft < this.thumbnails.scrollLeft) {
-                this._scroll(thumb.offsetLeft - thumb.offsetWidth);
-            } else if ((thumb.offsetLeft + thumb.offsetWidth) > (this.thumbnails.scrollLeft + this.thumbnails.offsetWidth)) {
-                this._scroll((thumb.offsetLeft + (thumb.offsetWidth * 2)) - this.thumbnails.offsetWidth);
-            }
+            this._scroll();
         }
     };
 
