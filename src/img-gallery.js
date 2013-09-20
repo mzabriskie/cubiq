@@ -217,6 +217,84 @@ THE SOFTWARE.
         image.style.height = Math.floor(height) + 'px';
     }
 
+    // Simple animations
+    var morph = (function () {
+        var FRAMES_PER_SECOND = 60,
+            MILLIS_PER_SECOND = 1000,
+            MILLIS_PER_FRAME = MILLIS_PER_SECOND / FRAMES_PER_SECOND;
+
+        var props = ['scrollLeft', 'scrollRight', 'scrollTop', 'scrollBottom'];
+
+        function getProp(el, key) {
+            return props.indexOf(key) >= 0 ? el[key] : parseInt(el.style[key], 10);
+        }
+
+        function setProp(el, key, val) {
+            return props.indexOf(key) >= 0 ? el[key] = val : (el.style[key] = val + 'px');
+        }
+
+        function done(idx, arr, callback) {
+            arr[idx] = true;
+
+            var finish = true,
+                i = arr.length;
+
+            while(i--) {
+                if (arr[i] === false) {
+                    finish = false;
+                    break;
+                }
+            }
+
+            if (finish) {
+                callback();
+            }
+        }
+
+        function schedule(el, duration, key, val, idx, arr, callback) {
+            var last = [];
+            var diff = val - getProp(el, key);
+            var step = (diff / ((duration / MILLIS_PER_SECOND) * FRAMES_PER_SECOND));
+            var timer = setInterval(function () {
+                var temp = getProp(el, key) + step;
+
+                if (last.length === 0 || temp !== last[0]) {
+                    last = [temp];
+                } else if (last.length < 5) {
+                    last.push(temp);
+                } else {
+                    clearInterval(timer);
+                    done(idx, arr, callback);
+                }
+
+                setProp(el, key, (step < 0 ? Math.max(temp, val) : Math.min(temp, val)));
+                if (getProp(el, key) === val) {
+                    clearInterval(timer);
+                    done(idx, arr, callback);
+                }
+            }, MILLIS_PER_FRAME);
+        }
+
+        function morph(el, duration, styles, callback) {
+            var counter = 0, tracker = [];
+            for (var key in styles) {
+                if (!styles.hasOwnProperty(key)) { continue; }
+                if (getProp(el, key) === styles[key]) { continue; }
+
+                var val = styles[key];
+                if (styles[key] instanceof Array) {
+                    setProp(el, key, styles[key][0]);
+                    val = styles[key][1];
+                }
+
+                tracker.push(false);
+                schedule(el, duration, key, val, counter++, tracker, callback);
+            }
+        }
+
+        return morph;
+    })();
+
     /**
      * Create an ImageGallery instance
      *
@@ -422,9 +500,11 @@ THE SOFTWARE.
             value = offset;
         }
 
-        this.thumbnails.scrollLeft = value;
-
-        this._adjust();
+        morph(this.thumbnails, 500, {
+            scrollLeft: value
+        }, function () {
+            this._adjust();
+        }.bind(this));
     };
 
     /**
