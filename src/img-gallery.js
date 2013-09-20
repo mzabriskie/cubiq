@@ -240,6 +240,7 @@ THE SOFTWARE.
     ImageGallery.prototype._build = function () {
         this.image = new Image();
         this.gallery = document.createElement('div');
+        this.container = document.createElement('div');
         this.preview = document.createElement('div');
         this.thumbnails = document.createElement('ul');
         this.thumbprev = document.createElement('a');
@@ -247,10 +248,11 @@ THE SOFTWARE.
         this.imageprev = document.createElement('div');
         this.imagenext = document.createElement('div');
 
-        this.gallery.appendChild(this.preview);
-        this.gallery.appendChild(this.thumbnails);
-        this.gallery.appendChild(this.thumbprev);
-        this.gallery.appendChild(this.thumbnext);
+        this.gallery.appendChild(this.container);
+        this.container.appendChild(this.preview);
+        this.container.appendChild(this.thumbnails);
+        this.container.appendChild(this.thumbprev);
+        this.container.appendChild(this.thumbnext);
         this.preview.appendChild(this.imageprev);
         this.preview.appendChild(this.imagenext);
         this.preview.appendChild(this.image);
@@ -258,6 +260,7 @@ THE SOFTWARE.
         this.imagenext.appendChild(document.createElement('a'));
 
         addClass(this.gallery, 'img-gallery');
+        addClass(this.container, 'img-gallery-container');
         addClass(this.preview, 'img-gallery-preview');
         addClass(this.thumbnails, 'img-gallery-thumbnails');
         addClass(this.thumbprev, 'img-gallery-thumbprev');
@@ -391,7 +394,8 @@ THE SOFTWARE.
     ImageGallery.prototype._scroll = function (offset) {
         var sWidth = this.thumbnails.scrollWidth,
             sLeft = this.thumbnails.scrollLeft,
-            oWidth = this.thumbnails.offsetWidth;
+            oWidth = this.thumbnails.offsetWidth,
+            value;
 
         if (typeof offset === 'undefined') {
             // Sync thumbs with active image
@@ -409,14 +413,16 @@ THE SOFTWARE.
         }
 
         if (offset === -1) {
-            this.thumbnails.scrollLeft = Math.max(0, sLeft - oWidth);
+            value = Math.max(0, sLeft - oWidth);
         } else if (offset === 1) {
-            this.thumbnails.scrollLeft = Math.min(sWidth, sLeft + oWidth);
+            value = Math.min(sWidth, sLeft + oWidth);
         } else {
             if (offset <= 5) { offset = 0; }
             if (offset > sWidth) { offset = sWidth; }
-            this.thumbnails.scrollLeft = offset;
+            value = offset;
         }
+
+        this.thumbnails.scrollLeft = value;
 
         this._adjust();
     };

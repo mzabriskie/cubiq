@@ -1,11 +1,20 @@
 /* Container */
 .img-gallery {
     background:#151515;
+    overflow:hidden;
     position:absolute;
     top:0;
     right:0;
     bottom:0;
     left:0;
+}
+
+.img-gallery-container {
+    position:absolute;
+    top:5px;
+    right:5px;
+    bottom:5px;
+    left:5px;
 }
 
 /* Full screen */
@@ -28,19 +37,19 @@
 .img-gallery .img-gallery-preview {
     overflow:hidden;
     position:absolute;
-    top:5px;
-    right:5px;
-    bottom:82px;
-    left:5px;
+    top:0;
+    right:0;
+    bottom:77px;
+    left:0;
 }
 
 /* Thumbnail */
 .img-gallery .img-gallery-thumbnails {
     overflow:hidden;
     position:absolute;
-    right:5px;
-    bottom:5px;
-    left:5px;
+    right:0;
+    bottom:0;
+    left:0;
     height:72px;
     white-space:nowrap;
 
@@ -76,7 +85,7 @@
     width:44px;
     height:100%;
     top:0;
-    bottom:82px;
+    bottom:77px;
     cursor:pointer;
     display:none; /*IE<9*/
 }
@@ -109,7 +118,7 @@
 .img-gallery .img-gallery-thumbnext {
     width:20px;
     height:72px;
-    bottom:5px;
+    bottom:0;
     display:none;
 }
 .img-gallery .img-gallery-thumbprev {
