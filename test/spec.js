@@ -25,13 +25,14 @@ QUnit.module('render');
 QUnit.test('dom structure', function (assert) {
     gallery.render();
     assert.equal(gallery.gallery.parentNode, gallery.el);
-    assert.equal(gallery.preview.parentNode, gallery.gallery);
+    assert.equal(gallery.container.parentNode, gallery.gallery);
+    assert.equal(gallery.preview.parentNode, gallery.container);
     assert.equal(gallery.image.parentNode, gallery.preview);
     assert.equal(gallery.imageprev.parentNode, gallery.preview);
     assert.equal(gallery.imagenext.parentNode, gallery.preview);
-    assert.equal(gallery.thumbnails.parentNode, gallery.gallery);
-    assert.equal(gallery.thumbprev.parentNode, gallery.gallery);
-    assert.equal(gallery.thumbnext.parentNode, gallery.gallery);
+    assert.equal(gallery.thumbnails.parentNode, gallery.container);
+    assert.equal(gallery.thumbprev.parentNode, gallery.container);
+    assert.equal(gallery.thumbnext.parentNode, gallery.container);
 });
 
 QUnit.module('images');
