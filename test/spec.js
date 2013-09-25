@@ -28,6 +28,7 @@ QUnit.test('dom structure', function (assert) {
     assert.equal(gallery.container.parentNode, gallery.gallery);
     assert.equal(gallery.preview.parentNode, gallery.container);
     assert.equal(gallery.image.parentNode, gallery.preview);
+    assert.equal(gallery.caption.parentNode, gallery.preview);
     assert.equal(gallery.imageprev.parentNode, gallery.preview);
     assert.equal(gallery.imagenext.parentNode, gallery.preview);
     assert.equal(gallery.thumbnails.parentNode, gallery.container);
@@ -38,12 +39,12 @@ QUnit.test('dom structure', function (assert) {
 QUnit.module('images');
 QUnit.test('adding images', function (assert) {
     //1. Add images and render
-    gallery.add('a.jpg');
+    gallery.add('a.jpg', null, 'Image A');
     gallery.add('b.jpg');
-    gallery.add('c.jpg', 'c-t.jpg');
+    gallery.add('c.jpg', 'c-t.jpg', 'Image C');
     gallery.render();
 
-    //2. Make sure logical images and thumbs are correct
+    //2. Make sure logical images, thumbs and labels are correct
     assert.equal(gallery.images.length, 3);
     assert.equal(gallery.thumbs.length, 3);
 
@@ -54,6 +55,10 @@ QUnit.test('adding images', function (assert) {
     assert.equal(gallery.thumbs[0], null);
     assert.equal(gallery.thumbs[1], null);
     assert.equal(gallery.thumbs[2], 'c-t.jpg');
+
+    assert.equal(gallery.labels[0], 'Image A');
+    assert.equal(gallery.labels[1], null);
+    assert.equal(gallery.labels[2], 'Image C');
 
     //3. Make sure gallery image source is correct
     assert.ok(assertImgSrc(gallery.image, 'a.jpg'));

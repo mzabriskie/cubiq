@@ -43,6 +43,22 @@
     left:0;
 }
 
+/* Caption */
+.img-gallery .img-gallery-caption {
+    position:absolute;
+    top:5px;
+    left:5px;
+    padding:10px;
+    letter-spacing:1px;
+    line-height:1em;
+    font-family:Helvetica, Arial, sans-serif;
+    font-size:14px;
+    color:#ffffff;
+    border-radius:2px;
+    background-color:#000000; /*IE<9*/
+    background-color:rgba(0, 0, 0, 0.75);
+}
+
 /* Thumbnail */
 .img-gallery .img-gallery-thumbnails {
     overflow:hidden;

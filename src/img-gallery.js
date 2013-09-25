@@ -305,6 +305,7 @@ THE SOFTWARE.
         this.el = el || document.body;
         this.images = [];
         this.thumbs = [];
+        this.labels = [];
 
         this._build();
         this._bind();
@@ -320,6 +321,7 @@ THE SOFTWARE.
         this.gallery = document.createElement('div');
         this.container = document.createElement('div');
         this.preview = document.createElement('div');
+        this.caption = document.createElement('div');
         this.thumbnails = document.createElement('ul');
         this.thumbprev = document.createElement('a');
         this.thumbnext = document.createElement('a');
@@ -333,6 +335,7 @@ THE SOFTWARE.
         this.container.appendChild(this.thumbnext);
         this.preview.appendChild(this.imageprev);
         this.preview.appendChild(this.imagenext);
+        this.preview.appendChild(this.caption);
         this.preview.appendChild(this.image);
         this.imageprev.appendChild(document.createElement('a'));
         this.imagenext.appendChild(document.createElement('a'));
@@ -340,6 +343,7 @@ THE SOFTWARE.
         addClass(this.gallery, 'img-gallery');
         addClass(this.container, 'img-gallery-container');
         addClass(this.preview, 'img-gallery-preview');
+        addClass(this.caption, 'img-gallery-caption');
         addClass(this.thumbnails, 'img-gallery-thumbnails');
         addClass(this.thumbprev, 'img-gallery-thumbprev');
         addClass(this.thumbnext, 'img-gallery-thumbnext');
@@ -540,10 +544,12 @@ THE SOFTWARE.
      *
      * @param {String} image The source of the image to show in the gallery
      * @param {String} [thumb] The source of the thumbnail for the image
+     * @param {String} [label] The label associated with the image
      */
-    ImageGallery.prototype.add = function (image, thumb) {
+    ImageGallery.prototype.add = function (image, thumb, label) {
         this.images.push(image);
         this.thumbs.push(thumb);
+        this.labels.push(label);
     };
 
     /**
@@ -558,8 +564,10 @@ THE SOFTWARE.
             }
 
             this.image.src = this.images[index];
+            this.caption.innerHTML = this.labels[index] || '';
             this._index = index;
 
+            this.caption.style.display = this.labels[index] ? '' : 'none';
             addClass(this.thumbnails.children[this._index], 'active');
             toggleClass(this.preview, 'img-gallery-hasimageprev', index > 0);
             toggleClass(this.preview, 'img-gallery-hasimagenext', index < this.images.length - 1);
