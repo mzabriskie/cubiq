@@ -30,7 +30,7 @@ Create an ImageGallery instance
 ##### element
 The container element for the gallery
 
-### add(image[, thumb])
+### add(image[, thumb[, label]])
 Add an image and optional thumbnail to the gallery
 
 ##### image
@@ -38,6 +38,9 @@ The source of the image to show in the gallery
 
 ##### thumb
 The source of the thumbnail for the image
+
+##### label
+The label associated with the image
 
 ###### Note
 If `thumb` is not provided `image` will be used as the thumbnail. While this may be convenient, the image will be scaled on the client using `width` and `height` styles without any consideration for aspect ratio. This will more than likely leave your image loooking distorted. It is recommended that you create a thumbnail yourself. The proper dimensions for thumbnails are `96px` x `72px`.
