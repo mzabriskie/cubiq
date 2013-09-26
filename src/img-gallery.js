@@ -379,8 +379,6 @@ THE SOFTWARE.
         }.bind(this);
 
         this.handleImageLoad = function () {
-            this._width = this.image.offsetWidth;
-            this._height = this.image.offsetHeight;
             this._scale();
         }.bind(this);
 
@@ -435,8 +433,8 @@ THE SOFTWARE.
     ImageGallery.prototype._scale = function () {
         this.image.style.marginTop = '';
         this.image.style.marginLeft = '';
-        this.image.style.width = this._width + 'px';
-        this.image.style.height = this._height + 'px';
+        this.image.style.width = '';
+        this.image.style.height = '';
 
         scale(this.image, this.preview.offsetWidth, this.preview.offsetHeight);
 
