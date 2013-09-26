@@ -1,5 +1,5 @@
 /* Container */
-.img-gallery {
+.cubiq-gallery {
     background:#151515;
     overflow:hidden;
     position:absolute;
@@ -9,7 +9,7 @@
     left:0;
 }
 
-.img-gallery-container {
+.cubiq-gallery-container {
     position:absolute;
     top:5px;
     right:5px;
@@ -18,7 +18,7 @@
 }
 
 /* Full screen */
-.img-gallery .img-gallery-fullscreen {
+.cubiq-gallery .cubiq-gallery-fullscreen {
     width:32px;
     height:32px;
     right:5px;
@@ -27,14 +27,14 @@
     background-position:9px -257px;
 }
 
-.img-gallery:-webkit-full-screen .img-gallery-fullscreen { background-position:9px -286px; }
-.img-gallery:-moz-full-screen .img-gallery-fullscreen { background-position:9px -286px; }
-.img-gallery:-ms-full-screen .img-gallery-fullscreen { background-position:9px -286px; }
-.img-gallery:-o-full-screen .img-gallery-fullscreen { background-position:9px -286px; }
-.img-gallery:full-screen .img-gallery-fullscreen { background-position:9px -286px; }
+.cubiq-gallery:-webkit-full-screen .cubiq-gallery-fullscreen { background-position:9px -286px; }
+.cubiq-gallery:-moz-full-screen .cubiq-gallery-fullscreen { background-position:9px -286px; }
+.cubiq-gallery:-ms-full-screen .cubiq-gallery-fullscreen { background-position:9px -286px; }
+.cubiq-gallery:-o-full-screen .cubiq-gallery-fullscreen { background-position:9px -286px; }
+.cubiq-gallery:full-screen .cubiq-gallery-fullscreen { background-position:9px -286px; }
 
 /* Image */
-.img-gallery .img-gallery-preview {
+.cubiq-gallery .cubiq-gallery-preview {
     overflow:hidden;
     position:absolute;
     top:0;
@@ -44,7 +44,7 @@
 }
 
 /* Caption */
-.img-gallery .img-gallery-caption {
+.cubiq-gallery .cubiq-gallery-caption {
     position:absolute;
     bottom:5px;
     left:5px;
@@ -60,7 +60,7 @@
 }
 
 /* Thumbnail */
-.img-gallery .img-gallery-thumbnails {
+.cubiq-gallery .cubiq-gallery-thumbnails {
     overflow:hidden;
     position:absolute;
     right:0;
@@ -73,7 +73,7 @@
     padding:0;
 }
 
-.img-gallery .img-gallery-thumbnails li {
+.cubiq-gallery .cubiq-gallery-thumbnails li {
     background:#4d4d4d;
     margin-right:5px;
     display:inline-block;
@@ -83,20 +83,20 @@
     zoom:1;
 }
 
-.img-gallery .img-gallery-thumbnails img {
+.cubiq-gallery .cubiq-gallery-thumbnails img {
     cursor:pointer;
     height:72px;
     width:96px;
     opacity:0.4;
 }
-.img-gallery .img-gallery-thumbnails img:hover,
-.img-gallery .img-gallery-thumbnails li.active img {
+.cubiq-gallery .cubiq-gallery-thumbnails img:hover,
+.cubiq-gallery .cubiq-gallery-thumbnails li.active img {
     opacity:1;
 }
 
 /* Image & thumbnail previous/next */
-.img-gallery .img-gallery-imageprev,
-.img-gallery .img-gallery-imagenext {
+.cubiq-gallery .cubiq-gallery-imageprev,
+.cubiq-gallery .cubiq-gallery-imagenext {
     position:absolute;
     width:44px;
     height:100%;
@@ -105,21 +105,21 @@
     cursor:pointer;
     display:none; /*IE<9*/
 }
-.img-gallery .img-gallery-imageprev {
+.cubiq-gallery .cubiq-gallery-imageprev {
     left:0;
 }
-.img-gallery .img-gallery-imageprev a {
+.cubiq-gallery .cubiq-gallery-imageprev a {
     background-position:9px -38px;
 }
-.img-gallery .img-gallery-imagenext {
+.cubiq-gallery .cubiq-gallery-imagenext {
     right:0;
 }
-.img-gallery .img-gallery-imagenext a {
+.cubiq-gallery .cubiq-gallery-imagenext a {
     background-position:9px -67px;
 }
 
-.img-gallery .img-gallery-imageprev a,
-.img-gallery .img-gallery-imagenext a {
+.cubiq-gallery .cubiq-gallery-imageprev a,
+.cubiq-gallery .cubiq-gallery-imagenext a {
     border-radius:2px;
     width:32px;
     height:32px;
@@ -130,36 +130,36 @@
     display:block;
 }
 
-.img-gallery .img-gallery-thumbprev,
-.img-gallery .img-gallery-thumbnext {
+.cubiq-gallery .cubiq-gallery-thumbprev,
+.cubiq-gallery .cubiq-gallery-thumbnext {
     width:20px;
     height:72px;
     bottom:0;
     display:none;
 }
-.img-gallery .img-gallery-thumbprev {
+.cubiq-gallery .cubiq-gallery-thumbprev {
     left:0;
     background-position:3px -89px;
 }
-.img-gallery .img-gallery-thumbnext {
+.cubiq-gallery .cubiq-gallery-thumbnext {
     right:0;
     background-position:3px -131px;
 }
 
 /* Buttons */
-.img-gallery .img-gallery-fullscreen:hover,
-.img-gallery .img-gallery-imageprev a:hover,
-.img-gallery .img-gallery-imagenext a:hover,
-.img-gallery .img-gallery-thumbprev:hover,
-.img-gallery .img-gallery-thumbnext:hover {
+.cubiq-gallery .cubiq-gallery-fullscreen:hover,
+.cubiq-gallery .cubiq-gallery-imageprev a:hover,
+.cubiq-gallery .cubiq-gallery-imagenext a:hover,
+.cubiq-gallery .cubiq-gallery-thumbprev:hover,
+.cubiq-gallery .cubiq-gallery-thumbnext:hover {
     background-color:#000000;
 }
 
-.img-gallery .img-gallery-fullscreen,
-.img-gallery .img-gallery-imageprev a,
-.img-gallery .img-gallery-imagenext a,
-.img-gallery .img-gallery-thumbprev,
-.img-gallery .img-gallery-thumbnext {
+.cubiq-gallery .cubiq-gallery-fullscreen,
+.cubiq-gallery .cubiq-gallery-imageprev a,
+.cubiq-gallery .cubiq-gallery-imagenext a,
+.cubiq-gallery .cubiq-gallery-thumbprev,
+.cubiq-gallery .cubiq-gallery-thumbnext {
     background-color:#000000; /*IE<9*/
     background-color:rgba(0, 0, 0, 0.75);
     background-image:url(default.png);
@@ -168,9 +168,9 @@
     cursor:pointer;
 }
 
-.img-gallery .img-gallery-fullscreen,
-.img-gallery .img-gallery-imageprev,
-.img-gallery .img-gallery-imagenext {
+.cubiq-gallery .cubiq-gallery-fullscreen,
+.cubiq-gallery .cubiq-gallery-imageprev,
+.cubiq-gallery .cubiq-gallery-imagenext {
     opacity:0;
     transition:opacity .5s;
     -o-transition:opacity .5s;
@@ -179,11 +179,11 @@
     -webkit-transition:opacity .5s;
 }
 
-.img-gallery:hover .img-gallery-fullscreen,
-.img-gallery-hasimageprev:hover .img-gallery-imageprev,
-.img-gallery-hasimagenext:hover .img-gallery-imagenext,
-.img-gallery-hasthumbprev .img-gallery-thumbprev,
-.img-gallery-hasthumbnext .img-gallery-thumbnext {
+.cubiq-gallery:hover .cubiq-gallery-fullscreen,
+.cubiq-gallery-hasimageprev:hover .cubiq-gallery-imageprev,
+.cubiq-gallery-hasimagenext:hover .cubiq-gallery-imagenext,
+.cubiq-gallery-hasthumbprev .cubiq-gallery-thumbprev,
+.cubiq-gallery-hasthumbnext .cubiq-gallery-thumbnext {
     display:block;
     opacity:1;
 }

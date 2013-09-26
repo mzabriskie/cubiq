@@ -1,12 +1,12 @@
 {
-	"name": "img-gallery",
+	"name": "cubiq",
 	"version": "0.1.0",
 	"description": "JavaScript image gallery",
 	"author": "Matt Zabriskie",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mzabriskie/img-gallery.git"
+		"url": "https://github.com/mzabriskie/cubiq.git"
 	},
 	"scripts": {
 		"test": "grunt jshint qunit"

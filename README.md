@@ -1,4 +1,4 @@
-img-gallery [![Build Status](https://travis-ci.org/mzabriskie/img-gallery.png?branch=master)](https://travis-ci.org/mzabriskie/img-gallery)
+cubiq [![Build Status](https://travis-ci.org/mzabriskie/cubiq.png?branch=master)](https://travis-ci.org/mzabriskie/cubiq)
 ===========
 
 JavaScript image gallery
@@ -14,7 +14,7 @@ Although functional, this is a rough first draft
 ## Example
 
 ```js
-var gallery = new ImageGallery(document.getElementById('gallery'));
+var gallery = Cubiq.create(document.getElementById('gallery'));
 gallery.add('image-a.png', 'image-a-thumb.png');
 gallery.add('image-b.png', 'image-b-thumb.png');
 gallery.add('image-c.png', 'image-c-thumb.png');
@@ -23,12 +23,6 @@ gallery.render();
 ```
 
 ## API
-
-### ImageGallery(element)
-Create an ImageGallery instance
-
-##### element
-The container element for the gallery
 
 ### add(image[, thumb[, label]])
 Add an image and optional thumbnail to the gallery
@@ -71,16 +65,16 @@ Detach the event handlers
 
 ## Building
 
-First you will need to clone a copy of the img-gallery repository:
+First you will need to clone a copy of the cubiq repository:
 
 ```bash
-git clone https://github.com/mzabriskie/img-gallery.git
+git clone https://github.com/mzabriskie/cubiq.git
 ```
 
-From the img-gallery directory install the Node dependencies:
+From the cubiq directory install the Node dependencies:
 
 ```bash
-cd img-gallery && npm install
+cd cubiq && npm install
 ```
 
 Now you can build the project:

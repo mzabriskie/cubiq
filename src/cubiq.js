@@ -296,12 +296,12 @@ THE SOFTWARE.
     })();
 
     /**
-     * Create an ImageGallery instance
+     * Create a Cubiq instance
      *
      * @param {Element} el The container element for the gallery
      * @constructor
      */
-    function ImageGallery(el) {
+    function Cubiq(el) {
         this.el = el || document.body;
         this.images = [];
         this.thumbs = [];
@@ -316,7 +316,7 @@ THE SOFTWARE.
      *
      * @private
      */
-    ImageGallery.prototype._build = function () {
+    Cubiq.prototype._build = function () {
         this.image = new Image();
         this.gallery = document.createElement('div');
         this.container = document.createElement('div');
@@ -340,20 +340,20 @@ THE SOFTWARE.
         this.imageprev.appendChild(document.createElement('a'));
         this.imagenext.appendChild(document.createElement('a'));
 
-        addClass(this.gallery, 'img-gallery');
-        addClass(this.container, 'img-gallery-container');
-        addClass(this.preview, 'img-gallery-preview');
-        addClass(this.caption, 'img-gallery-caption');
-        addClass(this.thumbnails, 'img-gallery-thumbnails');
-        addClass(this.thumbprev, 'img-gallery-thumbprev');
-        addClass(this.thumbnext, 'img-gallery-thumbnext');
-        addClass(this.imageprev, 'img-gallery-imageprev');
-        addClass(this.imagenext, 'img-gallery-imagenext');
+        addClass(this.gallery, 'cubiq-gallery');
+        addClass(this.container, 'cubiq-gallery-container');
+        addClass(this.preview, 'cubiq-gallery-preview');
+        addClass(this.caption, 'cubiq-gallery-caption');
+        addClass(this.thumbnails, 'cubiq-gallery-thumbnails');
+        addClass(this.thumbprev, 'cubiq-gallery-thumbprev');
+        addClass(this.thumbnext, 'cubiq-gallery-thumbnext');
+        addClass(this.imageprev, 'cubiq-gallery-imageprev');
+        addClass(this.imagenext, 'cubiq-gallery-imagenext');
 
         if (supportsFullScreen()) {
             this.fullscreen = document.createElement('a');
             this.preview.appendChild(this.fullscreen);
-            addClass(this.fullscreen, 'img-gallery-fullscreen');
+            addClass(this.fullscreen, 'cubiq-gallery-fullscreen');
         }
     };
 
@@ -362,7 +362,7 @@ THE SOFTWARE.
      *
      * @private
      */
-    ImageGallery.prototype._bind = function () {
+    Cubiq.prototype._bind = function () {
         this.handleWindowResize = function () {
             this._scale();
         }.bind(this);
@@ -386,26 +386,26 @@ THE SOFTWARE.
             var target = e.target || e.srcElement;
             switch(true) {
                 // Previous image
-                case (hasClass(target, 'img-gallery-imageprev') ||
-                    (target.nodeName === 'A' && hasClass(target.parentNode, 'img-gallery-imageprev'))):
+                case (hasClass(target, 'cubiq-gallery-imageprev') ||
+                    (target.nodeName === 'A' && hasClass(target.parentNode, 'cubiq-gallery-imageprev'))):
                     this.previous();
                     break;
                 // Next image
-                case (hasClass(target, 'img-gallery-imagenext') ||
-                    (target.nodeName === 'A' && hasClass(target.parentNode, 'img-gallery-imagenext'))):
+                case (hasClass(target, 'cubiq-gallery-imagenext') ||
+                    (target.nodeName === 'A' && hasClass(target.parentNode, 'cubiq-gallery-imagenext'))):
                     this.next();
                     break;
                 // Activate image
                 case (target.nodeName === 'IMG' && target.parentNode.nodeName === 'LI' &&
-                    hasClass(target.parentNode.parentNode, 'img-gallery-thumbnails')):
+                    hasClass(target.parentNode.parentNode, 'cubiq-gallery-thumbnails')):
                     this.select((indexOf(target.parentNode.parentNode.children, target.parentNode)));
                     break;
                 // Previous thumbnail
-                case hasClass(target, 'img-gallery-thumbprev'):
+                case hasClass(target, 'cubiq-gallery-thumbprev'):
                     this._scroll(-1);
                     break;
                 // Next thumbnail
-                case hasClass(target, 'img-gallery-thumbnext'):
+                case hasClass(target, 'cubiq-gallery-thumbnext'):
                     this._scroll(1);
                     break;
             }
@@ -430,7 +430,7 @@ THE SOFTWARE.
      *
      * @private
      */
-    ImageGallery.prototype._scale = function () {
+    Cubiq.prototype._scale = function () {
         this.image.style.marginTop = '';
         this.image.style.marginLeft = '';
         this.image.style.width = '';
@@ -449,16 +449,16 @@ THE SOFTWARE.
      *
      * @private
      */
-    ImageGallery.prototype._adjust = function () {
-        removeClass(this.gallery, 'img-gallery-hasthumbprev');
-        removeClass(this.gallery, 'img-gallery-hasthumbnext');
+    Cubiq.prototype._adjust = function () {
+        removeClass(this.gallery, 'cubiq-gallery-hasthumbprev');
+        removeClass(this.gallery, 'cubiq-gallery-hasthumbnext');
 
         if (this.thumbnails.scrollWidth > this.thumbnails.offsetWidth) {
             if (this.thumbnails.scrollLeft > 0) {
-                addClass(this.gallery, 'img-gallery-hasthumbprev');
+                addClass(this.gallery, 'cubiq-gallery-hasthumbprev');
             }
             if ((this.thumbnails.scrollLeft + this.thumbnails.offsetWidth) < this.thumbnails.scrollWidth) {
-                addClass(this.gallery, 'img-gallery-hasthumbnext');
+                addClass(this.gallery, 'cubiq-gallery-hasthumbnext');
             }
         }
     };
@@ -471,7 +471,7 @@ THE SOFTWARE.
      *                          otherwise sets the thumbnails scrollLeft to specified offset
      * @private
      */
-    ImageGallery.prototype._scroll = function (offset) {
+    Cubiq.prototype._scroll = function (offset) {
         var sWidth = this.thumbnails.scrollWidth,
             sLeft = this.thumbnails.scrollLeft,
             oWidth = this.thumbnails.offsetWidth,
@@ -512,7 +512,7 @@ THE SOFTWARE.
     /**
      * Attach the event handlers
      */
-    ImageGallery.prototype.attach = function () {
+    Cubiq.prototype.attach = function () {
         if (this._attached) return;
         addEvent(window, 'resize', this.handleWindowResize);
         addEvent(document, 'keydown', this.handleDocumentKeydown);
@@ -526,7 +526,7 @@ THE SOFTWARE.
     /**
      * Detach the event handlers
      */
-    ImageGallery.prototype.detach = function () {
+    Cubiq.prototype.detach = function () {
         if (!this._attached) return;
         removeEvent(window, 'resize', this.handleWindowResize);
         removeEvent(document, 'keydown', this.handleDocumentKeydown);
@@ -544,7 +544,7 @@ THE SOFTWARE.
      * @param {String} [thumb] The source of the thumbnail for the image
      * @param {String} [label] The label associated with the image
      */
-    ImageGallery.prototype.add = function (image, thumb, label) {
+    Cubiq.prototype.add = function (image, thumb, label) {
         this.images.push(image);
         this.thumbs.push(thumb);
         this.labels.push(label);
@@ -555,7 +555,7 @@ THE SOFTWARE.
      *
      * @param {Number} index The index of the desired image
      */
-    ImageGallery.prototype.select = function (index) {
+    Cubiq.prototype.select = function (index) {
         if (index < this.images.length && index > -1) {
             if (typeof this._index !== 'undefined') {
                 removeClass(this.thumbnails.children[this._index], 'active');
@@ -567,8 +567,8 @@ THE SOFTWARE.
 
             this.caption.style.display = this.labels[index] ? '' : 'none';
             addClass(this.thumbnails.children[this._index], 'active');
-            toggleClass(this.preview, 'img-gallery-hasimageprev', index > 0);
-            toggleClass(this.preview, 'img-gallery-hasimagenext', index < this.images.length - 1);
+            toggleClass(this.preview, 'cubiq-gallery-hasimageprev', index > 0);
+            toggleClass(this.preview, 'cubiq-gallery-hasimagenext', index < this.images.length - 1);
 
             this._scroll();
         }
@@ -577,21 +577,21 @@ THE SOFTWARE.
     /**
      * Select the next image in the gallery
      */
-    ImageGallery.prototype.next = function () {
+    Cubiq.prototype.next = function () {
         this.select(this._index + 1);
     };
 
     /**
      * Select the previous image in the gallery
      */
-    ImageGallery.prototype.previous = function () {
+    Cubiq.prototype.previous = function () {
         this.select(this._index - 1);
     };
 
     /**
      * Render the gallery
      */
-    ImageGallery.prototype.render = function () {
+    Cubiq.prototype.render = function () {
         this.el.innerHTML = '';
         this.thumbnails.innerHTML = '';
         this.el.appendChild(this.gallery);
@@ -608,11 +608,20 @@ THE SOFTWARE.
         this.attach();
     };
 
-    // Expose ImageGallery
+    /**
+     * Create a Cubiq instance
+     *
+     * @param {Element} el The container element for the gallery
+     */
+    Cubiq.create = function (el) {
+        return new Cubiq(el);
+    };
+
+    // Expose Cubiq
     if (typeof define === 'function' && define.amd) {
-        define('ImageGallery', [], function() { return ImageGallery; });
+        define('Cubiq', [], function() { return Cubiq; });
     } else {
-        window.ImageGallery = ImageGallery;
+        window.Cubiq = Cubiq;
     }
 
 })(window, document);

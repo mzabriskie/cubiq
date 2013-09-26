@@ -5,7 +5,7 @@ function assertImgSrc(img, src) {
 }
 
 QUnit.testStart(function () {
-    gallery = new ImageGallery(document.getElementById('gallery'));
+    gallery = Cubiq.create(document.getElementById('gallery'));
 });
 
 QUnit.testDone(function () {

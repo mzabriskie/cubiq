@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		jshint: {
-			all: ['Gruntfile.js', 'src/img-gallery.js']
+			all: ['Gruntfile.js', 'src/cubiq.js']
 		},
 		qunit: {
 			all: ['test/qunit.html']
@@ -15,14 +15,14 @@ module.exports = function(grunt) {
         uglify: {
             main: {
                 files: {
-                    'dist/img-gallery.min.js': ['src/img-gallery.js']
+                    'dist/cubiq.min.js': ['src/cubiq.js']
                 }
             }
         },
         copy: {
             main: {
                 files: [
-                    {src: 'src/img-gallery.js', dest: 'dist/', expand: true, flatten: true}
+                    {src: 'src/cubiq.js', dest: 'dist/', expand: true, flatten: true}
                 ]
             }
         }
