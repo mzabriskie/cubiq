@@ -617,6 +617,17 @@ THE SOFTWARE.
         return new Cubiq(el);
     };
 
+    /**
+     * Scale an image preserving aspect ratio
+     *
+     * @param {Image} image The image being scaled
+     * @param {Number} width The target width for the image
+     * @param {Number} height The target height for the image
+     */
+    Cubiq.scale = function (image, width, height) {
+        return scale(image, width, height);
+    };
+
     // Expose Cubiq
     if (typeof define === 'function' && define.amd) {
         define('Cubiq', [], function() { return Cubiq; });
