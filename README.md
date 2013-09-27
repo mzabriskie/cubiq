@@ -24,7 +24,9 @@ gallery.render();
 
 ## API
 
-### add(image[, thumb[, label]])
+### Instance methods
+
+#### add(image[, thumb[, label]])
 Add an image and optional thumbnail to the gallery
 
 ##### image
@@ -39,29 +41,49 @@ The label associated with the image
 ###### Note
 If `thumb` is not provided `image` will be used as the thumbnail. While this may be convenient, the image will be scaled on the client using `width` and `height` styles without any consideration for aspect ratio. This will more than likely leave your image loooking distorted. It is recommended that you create a thumbnail yourself. The proper dimensions for thumbnails are `96px` x `72px`.
 
-### select(index)
+#### select(index)
 Select a specific image to be the current preview image
 
 ##### index
 The index of the desired image
 
-### next()
+#### next()
 Select the next image in the gallery
 
 ### previous()
 Select the previous image in the gallery
 
-### render()
+#### render()
 Render the gallery
 
-### attach()
+#### attach()
 Attach the event handlers
 
 ###### Note
 This method is already called by `render`. You only need to call it manually if you have called `detach` and want to restore events.
 
-### detach()
+#### detach()
 Detach the event handlers
+
+### Static methods
+
+#### create(el)
+Create a Cubiq instance
+
+##### el
+The container element for the gallery
+
+#### scale(image, width, height)
+Scale an image preserving aspect ratio
+
+##### image
+The image being scaled
+
+##### width
+The target width for the image
+
+##### height
+The target height for the image
 
 ## Building
 
@@ -103,4 +125,4 @@ npm test
 
 ## License
 
-Released under the MIT license.
+Cubiq is released under the MIT license.
