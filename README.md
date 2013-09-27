@@ -50,7 +50,7 @@ The index of the desired image
 #### next()
 Select the next image in the gallery
 
-### previous()
+#### previous()
 Select the previous image in the gallery
 
 #### render()
