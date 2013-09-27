@@ -625,7 +625,7 @@ THE SOFTWARE.
      * @param {Number} height The target height for the image
      */
     Cubiq.scale = function (image, width, height) {
-        return scale(image, width, height);
+        scale(image, width, height);
     };
 
     // Expose Cubiq
