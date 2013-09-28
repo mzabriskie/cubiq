@@ -31,6 +31,8 @@ function populateGallery() {
 
 QUnit.testStart(function () {
     gallery = Cubiq.create(document.getElementById('gallery'));
+    populateGallery();
+    gallery.render();
 });
 
 QUnit.testDone(function () {
@@ -41,14 +43,15 @@ QUnit.testDone(function () {
 
 QUnit.module('constructor');
 QUnit.test('properties', function (assert) {
+    gallery = Cubiq.create(document.getElementById('gallery'));
     assert.equal(gallery.el, document.getElementById('gallery'));
     assert.equal(gallery.images.length, 0);
     assert.equal(gallery.thumbs.length, 0);
+    assert.equal(gallery.labels.length, 0);
 });
 
 QUnit.module('render');
 QUnit.test('dom structure', function (assert) {
-    gallery.render();
     assert.equal(gallery.gallery.parentNode, gallery.el);
     assert.equal(gallery.container.parentNode, gallery.gallery);
     assert.equal(gallery.preview.parentNode, gallery.container);
@@ -63,51 +66,60 @@ QUnit.test('dom structure', function (assert) {
 
 QUnit.module('images');
 QUnit.test('adding images', function (assert) {
-    //1. Add images and render
-    gallery.add('a.jpg', null, 'Image A');
-    gallery.add('b.jpg');
-    gallery.add('c.jpg', 'c-t.jpg', 'Image C');
+    var i;
+
+    //1. Make sure logical images, thumbs and labels are correct
+    assert.equal(gallery.images.length, images.length);
+    assert.equal(gallery.thumbs.length, images.length);
+    assert.equal(gallery.labels.length, images.length);
+
+    for (i=0; i<images.length; i++) {
+        assert.equal(gallery.images[i], images[i].image);
+        assert.equal(gallery.thumbs[i], images[i].thumb);
+        assert.equal(gallery.labels[i], images[i].label);
+    }
+
+    //2. Make sure thumbnail image sources are correct
+    assert.equal(gallery.thumbnails.children.length, images.length);
+
+    for (i=0; i<images.length; i++) {
+        assert.ok(assertImgSrc(gallery.thumbnails.children[i].children[0], images[i].thumb));
+    }
+});
+
+QUnit.test('default thumb', function (assert) {
+    gallery = Cubiq.create(document.getElementById('gallery'));
+    gallery.add('Image-A.jpg');
     gallery.render();
 
-    //2. Make sure logical images, thumbs and labels are correct
-    assert.equal(gallery.images.length, 3);
-    assert.equal(gallery.thumbs.length, 3);
-
-    assert.equal(gallery.images[0], 'a.jpg');
-    assert.equal(gallery.images[1], 'b.jpg');
-    assert.equal(gallery.images[2], 'c.jpg');
-
+    assert.equal(gallery.images[0], 'Image-A.jpg');
     assert.equal(gallery.thumbs[0], null);
-    assert.equal(gallery.thumbs[1], null);
-    assert.equal(gallery.thumbs[2], 'c-t.jpg');
 
-    assert.equal(gallery.labels[0], 'Image A');
-    assert.equal(gallery.labels[1], null);
-    assert.equal(gallery.labels[2], 'Image C');
+    assert.ok(assertImgSrc(gallery.thumbnails.children[0].children[0], 'Image-A.jpg'));
+});
 
-    //3. Make sure gallery image source is correct
-    assert.ok(assertImgSrc(gallery.image, 'a.jpg'));
+QUnit.test('caption', function (assert) {
+    gallery = Cubiq.create(document.getElementById('gallery'));
+    gallery.add('Image-A.jpg');
+    gallery.add('Image-B.jpg', null, 'This is image B');
+    gallery.render();
 
-    //4. Make sure thumbnail image sources are correct
-    assert.equal(gallery.thumbnails.children.length, 3);
-    assert.ok(assertImgSrc(gallery.thumbnails.children[0].children[0], 'a.jpg'));
-    assert.ok(assertImgSrc(gallery.thumbnails.children[1].children[0], 'b.jpg'));
-    assert.ok(assertImgSrc(gallery.thumbnails.children[2].children[0], 'c-t.jpg'));
+    assert.ok(gallery.caption.innerHTML === '');
+    assert.ok(gallery.caption.style.display === 'none');
+
+    gallery.next();
+
+    assert.ok(gallery.caption.innerHTML === 'This is image B');
+    assert.ok(gallery.caption.style.display === '');
 });
 
 QUnit.module('select');
 QUnit.test('default select', function (assert) {
-    populateGallery();
-    gallery.render();
-
     // Make sure first image is selected by default
     assertImgSelect(assert, 0);
 });
 
 QUnit.test('select by index', function (assert) {
-    populateGallery();
-    gallery.render();
-
     // Test selecting various images
     gallery.select(3);
     assertImgSelect(assert, 3);
@@ -120,9 +132,6 @@ QUnit.test('select by index', function (assert) {
 });
 
 QUnit.test('select boundary', function (assert) {
-    populateGallery();
-    gallery.render();
-
     // Make sure selection can't be made out of bounds
     gallery.select(0);
     gallery.select(-1);
@@ -133,9 +142,6 @@ QUnit.test('select boundary', function (assert) {
 });
 
 QUnit.test('select navigation', function (assert) {
-    populateGallery();
-    gallery.render();
-
     // Make sure navigation is correct
     gallery.select(0);
     assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimageprev') === -1);
@@ -151,9 +157,6 @@ QUnit.test('select navigation', function (assert) {
 });
 
 QUnit.test('next/previous', function (assert) {
-    populateGallery();
-    gallery.render();
-
     gallery.next();
     assertImgSelect(assert, 1);
 
