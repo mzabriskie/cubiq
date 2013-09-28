@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		jshint: {
-			all: ['Gruntfile.js', 'src/cubiq.js']
+			all: ['Gruntfile.js', 'src/cubiq.js', 'test/spec.js']
 		},
 		qunit: {
 			all: ['test/qunit.html']
