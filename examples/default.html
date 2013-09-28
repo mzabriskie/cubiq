@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <title>Cubiq</title>
+    <link rel="stylesheet" type="text/css" href="../themes/default.css"/>
+    <style type="text/css">
+        body {
+            font-family: "HelveticaNeue-UltraLight", Verdana, sans-serif;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a tortor feugiat, adipiscing est eu, consequat magna. Mauris iaculis viverra dignissim. Proin sit amet luctus metus. Pellentesque et lacus sodales, consequat dui vel, malesuada est. Duis cursus pharetra nisl vel dictum. Quisque id aliquet urna, in dictum ligula. Praesent fermentum leo quis est euismod, eu viverra sem pretium. Aenean tincidunt sodales velit, eu ullamcorper justo accumsan non. Suspendisse potenti. Cras pellentesque, neque at volutpat tincidunt, eros ante imperdiet ipsum, quis molestie mauris turpis vitae ligula. Pellentesque risus quam, suscipit aliquam adipiscing a, eleifend vitae est. Suspendisse elementum at nunc hendrerit vehicula.</p>
+    <div id="gallery" style="width:500px; height:500px; margin:0 auto; position:relative;"></div>
+    <p>Praesent at justo sed mauris sagittis sollicitudin in at lorem. Vivamus non molestie orci, vel volutpat erat. Nunc vehicula elit vitae purus porta ullamcorper. Ut in malesuada est, in imperdiet nisl. Ut vitae tristique mauris. Nullam et auctor ipsum, sit amet pellentesque elit. Nulla mi lorem, gravida sed tempor eu, consectetur sit amet dui. Duis tincidunt dolor vel neque aliquam tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque et consequat tellus. Curabitur rutrum tristique sapien et tempus. Sed semper facilisis lectus. Nam fringilla semper facilisis. Praesent malesuada feugiat feugiat.</p>
+
+    <script src="../src/cubiq.js"></script>
+    <script>
+        gallery = Cubiq.create(document.getElementById('gallery'));
+        gallery.add('img/acrobat.jpg', 'img/acrobat_thumb.jpg', 'The Acrobat, 1930 by Picasso');
+        gallery.add('img/blue-nude.jpg', 'img/blue-nude_thumb.jpg', 'Blue Nude, 1902 by Picasso');
+        gallery.add('img/bull-fight.jpg', 'img/bull-fight_thumb.jpg', 'Bullfight: Death of the Toreador, 1933 by Picasso');
+        gallery.add('img/don-quixote.jpg', 'img/don-quixote_thumb.jpg', 'Don Quixote, 1955 by Picasso');
+        gallery.add('img/guernica.jpg', 'img/guernica_thumb.jpg', 'Guernica, 1937 by Picasso');
+        gallery.add('img/ma-jolie.jpg', 'img/ma-jolie_thumb.jpg', 'Ma Jolie, 1911-1912 by Picasso');
+        gallery.add('img/mother-and-child.jpg', 'img/mother-and-child_thumb.jpg', 'Mother and Child, 1901 by Picasso');
+        gallery.add('img/the-old-guitarist.jpg', 'img/the-old-guitarist_thumb.jpg', 'The Old Guitarist, 1903 by Picasso');
+        gallery.add('img/three-musicians.jpg', 'img/three-musicians_thumb.jpg', 'Three Musicians, 1921 by Picasso');
+        gallery.add('img/woman-with-a-flower.jpg', 'img/woman-with-a-flower_thumb.jpg', 'Woman with a Flower, 1932 by Picasso');
+        gallery.add('img/young-acrobat-on-a-ball.jpg', 'img/young-acrobat-on-a-ball_thumb.jpg', 'Young Acrobat on a Ball, 1905 by Picasso');
+        gallery.render();
+    </script>
+</body>
+</html>
