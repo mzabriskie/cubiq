@@ -1,6 +1,6 @@
 var gallery,
     images = [
-        {image:'examples/img/acrobat.jpg', thumb:'examples/img/acrobat_thumb.jpg', label:'Young Acrobat on a Ball, 1905 by Picasso'},
+        {image:'examples/img/acrobat.jpg', thumb:'examples/img/acrobat_thumb.jpg', label:'The Acrobat, 1930 by Picasso'},
         {image:'examples/img/blue-nude.jpg', thumb:'examples/img/blue-nude_thumb.jpg', label:'Blue Nude, 1902 by Picasso'},
         {image:'examples/img/bull-fight.jpg', thumb:'examples/img/bull-fight_thumb.jpg', label:'Bullfight: Death of the Toreador, 1933 by Picasso'},
         {image:'examples/img/don-quixote.jpg', thumb:'examples/img/don-quixote_thumb.jpg', label:'Don Quixote, 1955 by Picasso'},
@@ -13,13 +13,13 @@ var gallery,
         {image:'examples/img/young-acrobat-on-a-ball.jpg', thumb:'examples/img/young-acrobat-on-a-ball_thumb.jpg', label:'Young Acrobat on a Ball, 1905 by Picasso'}
     ];
 
-function assertImgSrc(img, src) {
-    return img.src.substring(img.src.length - src.length) === src;
+function assertImgSrc(assert, img, src) {
+    assert.equal(img.src.substring(img.src.length - src.length), src);
 }
 
 function assertImgSelect(assert, index) {
-    assert.ok(assertImgSrc(gallery.image, images[index].image));
-    assert.ok(gallery.thumbnails.children[index].className === 'cubiq-gallery-thumbactive');
+    assertImgSrc(assert, gallery.image, images[index].image);
+    assert.equal(gallery.thumbnails.children[index].className, 'cubiq-gallery-thumbactive');
     assert.equal(gallery.caption.innerHTML, images[index].label);
 }
 
@@ -83,7 +83,7 @@ QUnit.test('adding images', function (assert) {
     assert.equal(gallery.thumbnails.children.length, images.length);
 
     for (i=0; i<images.length; i++) {
-        assert.ok(assertImgSrc(gallery.thumbnails.children[i].children[0], images[i].thumb));
+        assertImgSrc(assert, gallery.thumbnails.children[i].children[0], images[i].thumb);
     }
 });
 
@@ -95,7 +95,7 @@ QUnit.test('default thumb', function (assert) {
     assert.equal(gallery.images[0], 'Image-A.jpg');
     assert.equal(gallery.thumbs[0], null);
 
-    assert.ok(assertImgSrc(gallery.thumbnails.children[0].children[0], 'Image-A.jpg'));
+    assertImgSrc(assert, gallery.thumbnails.children[0].children[0], 'Image-A.jpg');
 });
 
 QUnit.test('caption', function (assert) {
@@ -104,13 +104,13 @@ QUnit.test('caption', function (assert) {
     gallery.add('Image-B.jpg', null, 'This is image B');
     gallery.render();
 
-    assert.ok(gallery.caption.innerHTML === '');
-    assert.ok(gallery.caption.style.display === 'none');
+    assert.equal(gallery.caption.innerHTML, '');
+    assert.equal(gallery.caption.style.display, 'none');
 
     gallery.next();
 
-    assert.ok(gallery.caption.innerHTML === 'This is image B');
-    assert.ok(gallery.caption.style.display === '');
+    assert.equal(gallery.caption.innerHTML, 'This is image B');
+    assert.equal(gallery.caption.style.display, '');
 });
 
 QUnit.module('select');
@@ -144,12 +144,12 @@ QUnit.test('select boundary', function (assert) {
 QUnit.test('select navigation', function (assert) {
     // Make sure navigation is correct
     gallery.select(0);
-    assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimageprev') === -1);
+    assert.equal(gallery.preview.className.indexOf('cubiq-gallery-hasimageprev'), -1);
     assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimagenext') > 0);
 
     gallery.select(images.length - 1);
     assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimageprev') > 0);
-    assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimagenext') === -1);
+    assert.equal(gallery.preview.className.indexOf('cubiq-gallery-hasimagenext'), -1);
 
     gallery.select(5);
     assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimageprev') > 0);
