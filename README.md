@@ -4,11 +4,12 @@ cubiq [![Build Status](https://travis-ci.org/mzabriskie/cubiq.png?branch=master)
 JavaScript image gallery
 
 ## TODO
-Although functional, this is a rough first draft
+Although functional, there is still a lot to do:
 
 * Testing
 * Animations
-* Themes/Layouts
+* Themes
+* Layouts
 * Examples
 
 ## Example
