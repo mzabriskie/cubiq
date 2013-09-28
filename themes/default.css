@@ -90,7 +90,7 @@
     opacity:0.4;
 }
 .cubiq-gallery .cubiq-gallery-thumbnails img:hover,
-.cubiq-gallery .cubiq-gallery-thumbnails li.active img {
+.cubiq-gallery .cubiq-gallery-thumbnails li.cubiq-gallery-thumbactive img {
     opacity:1;
 }
 

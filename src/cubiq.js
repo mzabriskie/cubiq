@@ -558,7 +558,7 @@ THE SOFTWARE.
     Cubiq.prototype.select = function (index) {
         if (index < this.images.length && index > -1) {
             if (typeof this._index !== 'undefined') {
-                removeClass(this.thumbnails.children[this._index], 'active');
+                removeClass(this.thumbnails.children[this._index], 'cubiq-gallery-thumbactive');
             }
 
             this.image.src = this.images[index];
@@ -566,7 +566,7 @@ THE SOFTWARE.
             this._index = index;
 
             this.caption.style.display = this.labels[index] ? '' : 'none';
-            addClass(this.thumbnails.children[this._index], 'active');
+            addClass(this.thumbnails.children[this._index], 'cubiq-gallery-thumbactive');
             toggleClass(this.preview, 'cubiq-gallery-hasimageprev', index > 0);
             toggleClass(this.preview, 'cubiq-gallery-hasimagenext', index < this.images.length - 1);
 

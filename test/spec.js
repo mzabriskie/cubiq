@@ -19,7 +19,7 @@ function assertImgSrc(img, src) {
 
 function assertImgSelect(assert, index) {
     assert.ok(assertImgSrc(gallery.image, images[index].image));
-    assert.ok(gallery.thumbnails.children[index].className = 'active');
+    assert.ok(gallery.thumbnails.children[index].className === 'cubiq-gallery-thumbactive');
     assert.equal(gallery.caption.innerHTML, images[index].label);
 }
 
