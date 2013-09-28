@@ -225,12 +225,27 @@ THE SOFTWARE.
 
         var props = ['scrollLeft', 'scrollRight', 'scrollTop', 'scrollBottom'];
 
+        function indexOf(arr, val) {
+            var index = -1;
+            if (typeof arr.indexOf === 'function') {
+                index = arr.indexOf(val);
+            } else {
+                for (var i=0, l=arr.length; i<l; i++) {
+                    if (arr[i] === val) {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            return index;
+        }
+
         function getProp(el, key) {
-            return props.indexOf(key) >= 0 ? el[key] : parseInt(el.style[key], 10);
+            return indexOf(props, key) >= 0 ? el[key] : parseInt(el.style[key], 10);
         }
 
         function setProp(el, key, val) {
-            return props.indexOf(key) >= 0 ? el[key] = val : (el.style[key] = val + 'px');
+            return indexOf(props, key) >= 0 ? el[key] = val : (el.style[key] = val + 'px');
         }
 
         function done(idx, arr, callback) {
