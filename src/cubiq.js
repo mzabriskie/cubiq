@@ -261,7 +261,7 @@ THE SOFTWARE.
                 }
             }
 
-            if (finish) {
+            if (finish && typeof callback === 'function') {
                 callback();
             }
         }
