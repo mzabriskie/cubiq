@@ -218,7 +218,7 @@ THE SOFTWARE.
     }
 
     // Simple animations
-    var morph = (function () {
+    var morph = (function (window) {
         var FRAMES_PER_SECOND = 60,
             MILLIS_PER_SECOND = 1000,
             MILLIS_PER_FRAME = MILLIS_PER_SECOND / FRAMES_PER_SECOND;
@@ -270,24 +270,26 @@ THE SOFTWARE.
             var last = [];
             var diff = val - getProp(el, key);
             var step = (diff / ((duration / MILLIS_PER_SECOND) * FRAMES_PER_SECOND));
-            var timer = setInterval(function () {
+
+            (function animate() {
                 var temp = getProp(el, key) + step;
 
                 if (last.length === 0 || temp !== last[0]) {
                     last = [temp];
-                } else if (last.length < 5) {
+                } else if (last.length < 2) {
                     last.push(temp);
                 } else {
-                    clearInterval(timer);
                     done(idx, arr, callback);
+                    return;
                 }
 
                 setProp(el, key, (step < 0 ? Math.max(temp, val) : Math.min(temp, val)));
                 if (getProp(el, key) === val) {
-                    clearInterval(timer);
                     done(idx, arr, callback);
+                } else {
+                    window.requestAnimationFrame(animate);
                 }
-            }, MILLIS_PER_FRAME);
+            })();
         }
 
         function morph(el, duration, styles, callback) {
@@ -307,8 +309,30 @@ THE SOFTWARE.
             }
         }
 
+        // requestAnimationFrame polyfill
+        // https://gist.github.com/paulirish/1579671
+        (function() {
+            var vendors = ['ms', 'moz', 'webkit', 'o'];
+            for (var x=0; x<vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function(callback) {
+                    return setTimeout(callback, MILLIS_PER_FRAME);
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+            }
+        })();
+
         return morph;
-    })();
+    })(window);
 
     /**
      * Create a Cubiq instance
