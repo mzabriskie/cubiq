@@ -3,15 +3,6 @@ cubiq [![Build Status](https://travis-ci.org/mzabriskie/cubiq.png?branch=master)
 
 JavaScript image gallery
 
-## TODO
-Although functional, there is still a lot to do:
-
-* Testing
-* Animations
-* Themes
-* Layouts
-* Examples
-
 ## Example
 
 ```js
@@ -123,6 +114,15 @@ Using npm:
 ```bash
 npm test
 ```
+
+## TODO
+Although functional, there is still a lot to do:
+
+* Testing
+* Animations
+* Themes
+* Layouts
+* Examples
 
 ## License
 
