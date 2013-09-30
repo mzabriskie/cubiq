@@ -7,10 +7,10 @@ JavaScript image gallery
 
 ```js
 var gallery = Cubiq.create(document.getElementById('gallery'));
-gallery.add('image-a.png', 'image-a-thumb.png');
-gallery.add('image-b.png', 'image-b-thumb.png');
-gallery.add('image-c.png', 'image-c-thumb.png');
-gallery.add('image-d.png', 'image-d-thumb.png');
+gallery.add('image-a.png', 'image-a-thumb.png', 'Caption for image A');
+gallery.add('image-b.png', 'image-b-thumb.png', 'Caption for image B');
+gallery.add('image-c.png', 'image-c-thumb.png', 'Caption for image C');
+gallery.add('image-d.png', 'image-d-thumb.png', 'Caption for image D');
 gallery.render();
 ```
 
