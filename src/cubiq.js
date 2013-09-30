@@ -241,7 +241,7 @@ THE SOFTWARE.
         }
 
         function getProp(el, key) {
-            return indexOf(props, key) >= 0 ? el[key] : parseInt(el.style[key], 10);
+            return indexOf(props, key) >= 0 ? el[key] : parseInt(el.style[key], 10) || 0;
         }
 
         function setProp(el, key, val) {
@@ -587,6 +587,10 @@ THE SOFTWARE.
         this.images.push(image);
         this.thumbs.push(thumb);
         this.labels.push(label);
+
+        // Pre-load images for faster animations
+        if (typeof image === 'string') { new Image().src = image; }
+        if (typeof thumb === 'string') { new Image().src = thumb; }
     };
 
     /**
@@ -598,13 +602,34 @@ THE SOFTWARE.
         if (index < this.images.length && index > -1) {
             if (typeof this._index !== 'undefined') {
                 removeClass(this.thumbnails.children[this._index], 'cubiq-gallery-thumbactive');
+
+                var oldImage = this.image,
+                    newImage = new Image(),
+                    offset = (index > this._index ? -1 : 1) * (this.preview.offsetWidth + 100);
+
+                addEvent(newImage, 'load', this.handleImageLoad);
+                addEvent(newImage, 'load', function () {
+                    morph(newImage, 500, {
+                        left: 0
+                    });
+
+                    morph(oldImage, 500, {
+                        left: offset
+                    }, function () {
+                        oldImage.parentNode.removeChild(oldImage);
+                    });
+                });
+
+                this.image = newImage;
+                this.image.style.left = (offset * -1) + 'px';
+                this.preview.appendChild(this.image);
             }
 
             this.image.src = this.images[index];
             this.caption.innerHTML = this.labels[index] || '';
+            this.caption.style.display = this.labels[index] ? '' : 'none';
             this._index = index;
 
-            this.caption.style.display = this.labels[index] ? '' : 'none';
             addClass(this.thumbnails.children[this._index], 'cubiq-gallery-thumbactive');
             toggleClass(this.preview, 'cubiq-gallery-hasimageprev', index > 0);
             toggleClass(this.preview, 'cubiq-gallery-hasimagenext', index < this.images.length - 1);
