@@ -407,6 +407,9 @@ THE SOFTWARE.
         }.bind(this);
 
         this.handleDocumentKeydown = function (e) {
+            if (this._animating === true) {
+                return;
+            }
             switch(e.keyCode) {
                 case 37:
                     this.previous();
@@ -607,6 +610,8 @@ THE SOFTWARE.
                     newImage = new Image(),
                     offset = (index > this._index ? -1 : 1) * (this.preview.offsetWidth + 100);
 
+                this._animating = true;
+                var self = this;
                 addEvent(newImage, 'load', this.handleImageLoad);
                 addEvent(newImage, 'load', function () {
                     morph(newImage, 500, {
@@ -617,6 +622,7 @@ THE SOFTWARE.
                         left: offset
                     }, function () {
                         oldImage.parentNode.removeChild(oldImage);
+                        self._animating = false;
                     });
                 });
 
