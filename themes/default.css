@@ -200,6 +200,7 @@
 /* Z Index */
 .cubiq-gallery .cubiq-gallery-fullscreen,
 .cubiq-gallery .cubiq-gallery-imageprev,
-.cubiq-gallery .cubiq-gallery-imagenext {
+.cubiq-gallery .cubiq-gallery-imagenext,
+.cubiq-gallery .cubiq-gallery-caption {
     z-index:1000;
 }
