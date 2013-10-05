@@ -110,6 +110,17 @@ THE SOFTWARE.
         return typeof fn === 'function';
     }
 
+    // Determine if CSS transitions are supported
+    function supportsTransitions() {
+        var style = document.createElement('div').style;
+
+        return 'transition' in style ||
+            'WebkitTransition' in style ||
+            'MozTransition' in style ||
+            'msTransition' in style ||
+            'OTransition' in style;
+    }
+
     // Determine if full screen support is available
     function supportsFullScreen() {
         var el = document.createElement('div');
@@ -346,6 +357,11 @@ THE SOFTWARE.
         this.thumbs = [];
         this.labels = [];
 
+        this.support = {
+            fullscreen: supportsFullScreen(),
+            transitions: supportsTransitions()
+        };
+
         this._build();
         this._bind();
     }
@@ -389,7 +405,7 @@ THE SOFTWARE.
         addClass(this.imageprev, 'cubiq-gallery-imageprev');
         addClass(this.imagenext, 'cubiq-gallery-imagenext');
 
-        if (supportsFullScreen()) {
+        if (this.support.fullscreen) {
             this.fullscreen = document.createElement('a');
             this.preview.appendChild(this.fullscreen);
             addClass(this.fullscreen, 'cubiq-gallery-fullscreen');
@@ -614,16 +630,28 @@ THE SOFTWARE.
                 var self = this;
                 addEvent(newImage, 'load', this.handleImageLoad);
                 addEvent(newImage, 'load', function () {
-                    morph(newImage, 500, {
-                        left: 0
-                    });
+                    // Use CSS transitions if supported
+                    if (self.support.transitions) {
+                        newImage.style.left = '';
+                        oldImage.style.left = offset + 'px';
+                        setTimeout(function () {
+                            oldImage.parentNode.removeChild(oldImage);
+                            self._animating = false;
+                        }, 600);
+                    }
+                    // Otherwise animate with JavaScript
+                    else {
+                        morph(newImage, 500, {
+                            left: 0
+                        });
 
-                    morph(oldImage, 500, {
-                        left: offset
-                    }, function () {
-                        oldImage.parentNode.removeChild(oldImage);
-                        self._animating = false;
-                    });
+                        morph(oldImage, 500, {
+                            left: offset
+                        }, function () {
+                            oldImage.parentNode.removeChild(oldImage);
+                            self._animating = false;
+                        });
+                    }
                 });
 
                 this.image = newImage;

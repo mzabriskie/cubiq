@@ -45,6 +45,11 @@
 
 .cubiq-gallery .cubiq-gallery-preview img {
     position:absolute;
+    transition:left .5s;
+    -o-transition:left .5s;
+    -ms-transition:left .5s;
+    -moz-transition:left .5s;
+    -webkit-transition:left .5s;
 }
 
 /* Caption */
