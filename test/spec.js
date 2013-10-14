@@ -156,6 +156,21 @@ QUnit.test('select navigation', function (assert) {
     assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasimagenext') > 0);
 });
 
+// TODO: These tests fail because scrollWidth, offsetWidth, etc. aren't measured correctly within QUnit
+//QUnit.test('thumb navigation', function (assert) {
+//    gallery.select(0);
+//    assert.equal(gallery.gallery.className.indexOf('cubiq-gallery-hasthumbprev'), -1);
+//    assert.ok(gallery.gallery.className.indexOf('cubiq-gallery-hasthumbnext') > 0);
+//
+//    gallery.select(images.length - 1);
+//    assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasthumbprev') > 0);
+//    assert.equal(gallery.preview.className.indexOf('cubiq-gallery-hasthumbnext'), -1);
+//
+//    gallery.select(5);
+//    assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasthumbprev') > 0);
+//    assert.ok(gallery.preview.className.indexOf('cubiq-gallery-hasthumbnext') > 0);
+//});
+
 QUnit.test('next/previous', function (assert) {
     gallery.next();
     assertImgSelect(assert, 1);
